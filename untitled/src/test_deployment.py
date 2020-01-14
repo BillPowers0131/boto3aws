@@ -93,8 +93,12 @@ def main():
 
     ami_id = 'ami-00068cd7555f543d5'
 
-    user_data = """#!/bin/bash yum update -y yum install httpd - y service httpd start chkconfig httpd on echo 
-    "<html><body><h1>Hello from Boto3 using Python!</h1></body></html>" > /var/www/html/index.html """
+    user_data = """#!/bin/bash
+                    yum update -y
+                    yum install httpd -y
+                    service httpd start
+                    chkconfig httpd on
+                    echo "<html><body><h1>Hello from <b>Boto3</b> using Python!</h1></body></html>" > /var/www/html/index.html"""
 
     # launch a public EC2 instance
 
@@ -107,7 +111,7 @@ def main():
     private_security_group_name = 'Boto3-Private-SG'
     private_security_group_description = 'Private security group for Private Subnet'
     private_security_group_response = ec2.create_security_group(private_security_group_name,
-                                                                private_security_group_description, vpc_id)
+    private_security_group_description, vpc_id)
     private_security_group_response['GroupId']
 
     private_security_group_id = private_security_group_response['GroupId']

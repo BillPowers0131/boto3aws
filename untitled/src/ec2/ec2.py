@@ -36,6 +36,7 @@ class EC2:
             ]
 
         )
+
     def launch_ec2_instance(self,image_id,key_name,min_count,max_count,security_group_id,subnet_id,user_data):
         print('Launching ' + str(min_count) + ' EC2 instance(s).')
         return self._client.run_instances(
