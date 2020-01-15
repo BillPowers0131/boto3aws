@@ -121,5 +121,43 @@ def main():
     ec2.launch_ec2_instance(ami_id, key_pair_name, 1, 1, private_security_group_id, private_subnet_id, """""")
 
 
+def ec2_describe_instances():
+
+    ec2_client = EC2Client().get_client()
+    ec2 = EC2(ec2_client)
+
+    ec2_response = ec2.describe_ec2_instances()
+
+    print(str(ec2_response))
+
+def modify_instance():
+    ec2_client = EC2Client().get_client()
+    ec2 = EC2(ec2_client)
+
+    ec2.modify_ec2_instances('i-0b0f39c2bc2772c2c')
+
+def stop_instance():
+    ec2_client = EC2Client().get_client()
+    ec2 = EC2(ec2_client)
+
+    ec2.stop_instance('i-0318a575decfbce29')
+
+def start_instance():
+    ec2_client = EC2Client().get_client()
+    ec2 = EC2(ec2_client)
+
+    ec2.start_instance('i-0318a575decfbce29')
+
+def terminate_instance():
+    ec2_client = EC2Client().get_client()
+    ec2 = EC2(ec2_client)
+
+    ec2.terminate_instance('i-0318a575decfbce29')
+
 if __name__ == '__main__':
-    main()
+    #main()
+    #ec2_describe_instances()
+    #modify_instance()
+    #stop_instance()
+    #start_instance()
+    terminate_instance()
