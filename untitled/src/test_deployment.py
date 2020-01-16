@@ -128,6 +128,7 @@ def ec2_describe_instances():
 
     ec2_response = ec2.describe_ec2_instances()
 
+
     print(str(ec2_response))
 
 def modify_instance():
@@ -154,10 +155,19 @@ def terminate_instance():
 
     ec2.terminate_instance('i-0318a575decfbce29')
 
+def create_image():
+    ec2_client = EC2Client().get_client()
+    ec2 = EC2(ec2_client)
+
+    ec2.create_image('i-0b0f39c2bc2772c2c')
+
 if __name__ == '__main__':
     #main()
     #ec2_describe_instances()
     #modify_instance()
     #stop_instance()
     #start_instance()
-    terminate_instance()
+    #terminate_instance()
+    #snapshot_instance()
+    create_image()
+
