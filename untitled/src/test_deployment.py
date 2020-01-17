@@ -1,6 +1,8 @@
 from src.ec2.vpc import VPC
 from src.ec2.ec2 import EC2
 from src.client_locator import EC2Client
+import os
+
 
 
 def main():
@@ -72,10 +74,27 @@ def main():
 
     ec2 = EC2(ec2_client)
 
-    key_pair_name = 'Boto3-keypair'
-    key_pair_response = ec2.create_key_par(key_pair_name)
+    key_pair_name = 'Botokey4'
+    key_pair_response = ec2.create_key_pair(key_pair_name)
+
+    # Put the key key pair to a file
+
+    file = open('Botokey4.pem','w')
+
+    file.write(key_pair_response['KeyMaterial'])
+
+    file.close()
+
+    os.chmod('Botokey4.pem',0o600)
+
+
+
+
+
+
 
     print('Created key pair with ' + key_pair_name + 'as well as ' + str(key_pair_response))
+
 
     # create a security group
     public_security_group_name = 'Boto-Public-SG'
@@ -161,13 +180,13 @@ def create_image():
 
     ec2.create_image('i-0b0f39c2bc2772c2c')
 
+
 if __name__ == '__main__':
-    #main()
+    main()
     #ec2_describe_instances()
     #modify_instance()
     #stop_instance()
     #start_instance()
     #terminate_instance()
     #snapshot_instance()
-    create_image()
-
+    #create_image()

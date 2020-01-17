@@ -1,10 +1,14 @@
 
+
+import datetime
+
+
 class EC2:
     def __init__(self, client):
         self._client = client
         """ :type : pyboto3.ec2"""
 
-    def create_key_par(self,key_name):
+    def create_key_pair(self,key_name):
         print('Creating key name')
         return self._client.create_key_pair(KeyName=key_name)
 
@@ -58,7 +62,7 @@ class EC2:
         print('Modifying instance ID: ' + instance_id)
         return self._client.modify_instance_attribute(
             InstanceId=instance_id,
-            DisableApiTermination={"Value": True}
+            DisableApiTermination={"Value": False}
         )
 
     def stop_instance(self,instance_id):
@@ -81,9 +85,11 @@ class EC2:
 
     def create_image(self,instance_id):
         print('Taking a snapshot of ' + instance_id)
+        snapshot_time = datetime.date.today()
+        print(snapshot_time)
         return self._client.create_image(
-            InstanceId=instance_id,
-            Name='Bill'
+           InstanceId=instance_id,
+            Name=f'AMI Timestamp {snapshot_time}'
             )
 
 
